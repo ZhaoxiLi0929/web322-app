@@ -93,6 +93,28 @@ module.exports.getPeopleByVin=(vin)=>{
     })
 }
 
+module.exports.getPeopleById=(id)=>{
+    return new Promise ((resolve, reject)=>{
+        if (people.length != 0){
+            console.log(id)
+            const person = people.filter(person=>person.id == id)[0]
+            resolve(person)
+        }else{
+            reject({message: "people array is empty"})
+        }
+    })
+}
+
+module.exports.getPeopleByVin=(vin)=>{
+    return new Promise ((resolve, reject)=>{
+        if (people.length != 0){
+            resolve(people.filter(person=>person.vin === vin))
+        }else{
+            reject({message: "people array is empty"})
+        }
+    })
+}
+
 module.exports.getCars = () =>{
     return new Promise ((resolve, reject)=>{
         Car.findAll()
@@ -157,6 +179,36 @@ module.exports.addCars = (CarData) => {
             Car.create(CarData)
             .then(() => resolve(`successfully created a new car`))
             .catch(() => reject('failed to create a new car'))
+    })
+}
+
+module.exports.getCarsByVin=(vin)=>{
+    return new Promise ((resolve, reject)=>{
+        if (people.length != 0){
+            resolve(cars.filter(car=>car.vin === vin))
+        }else{
+            reject({message: "cars array is empty"})
+        }
+    })
+}
+
+module.exports.getCarsByMake=(make)=>{
+    return new Promise ((resolve, reject)=>{
+        if (people.length != 0){
+            resolve(cars.filter(car=>car.make === make))
+        }else{
+            reject({message: "cars array is empty"})
+        }
+    })
+}
+
+module.exports.getCarsByYear=(year)=>{
+    return new Promise ((resolve, reject)=>{
+        if (people.length != 0){
+            resolve(cars.filter(car=>car.year == year))
+        }else{
+            reject({message: "cars array is empty"})
+        }
     })
 }
 
